@@ -12,11 +12,14 @@ table{
 }
 .Title{
     text-align: center;
+    font-family: sans-serif
 }
 .Score{
     text-align:center;
+    font-family:sans-serif
 }
 .P1,.P2{
     text-align:center; 
     padding-right: 160px;
+    font-family:sans-serif
 }
