@@ -12,7 +12,7 @@ Create animations that appear as “X” and “O”
 o	Players will click on a selected box. 
 	The animation will show after the click. 
 Create a loop for each player to alternate turns. 
-•	One turn per player
+•	One turn per player (player vs. computer)
 •	Each player selects a box. Alternating turns. 
 •	For each player: prevent selecting a box no more than once.
 If 3 “O”s or 3 “X”s match linearly (or diagonally) the first player wins. 
