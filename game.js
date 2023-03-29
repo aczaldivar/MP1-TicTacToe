@@ -1,64 +1,98 @@
-const myArray = [
-    [0, 0, 0],
-    [0, 0, 0],
-    [0, 0, 0]
+const board = [
+    [null, null, null],
+    [null, null, null],
+    [null, null, null]
   ];
   
-  
-  let coordinates = [
-    {row: 0, col: 0},
-    {row: 0, col: 1},
-    {row: 0, col: 2},
-    {row: 1, col: 0},
-    {row: 1, col: 1},
-    {row: 1, col: 2},
-    {row: 2, col: 0},
-    {row: 2, col: 1},
-    {row: 2, col: 2},
-  ];
-  
-  // Mark Xs on the array at the specified coordinates
- 
-  for (let i = 0; i < coordinates.length; i++) {
-    let coord = coordinates[i];
-    array[coord.row][coord.col] = 'X';
-  }
-  
-  const grid = document.getElementById('grid-container');
-
-  // Attach an event listener to each cell in the grid
-  for (let row = 0; row < grid.rows.length; row++) {
-    for (let col = 0; col < grid.rows[row].cells.length; col++) {
-      grid.rows[row].cells[col].addEventListener('click', function() {
-        // Retrieve the row and column index of the clicked cell
-        const rowIndex = row;
-        const colIndex = col;
-
-        console.log(`Clicked cell at row ${rowIndex}, column ${colIndex}`);
-      });
+  function determinePlayer1() {
+    let player1 = Math.random();
+    let player2 = Math.random();
+    if (player1 > player2) {
+      return 'X';
+    } else {
+      return 'O';
     }
   }
-
-
-
-  //function coordinatesAreEqual(coord1, coord2) {
-    // Check if the row and column values are the same
-  //  return coord1.row === coord2.row && coord1.col === coord2.col;
- // }
   
+  let currentPlayer = determinePlayer1();
 
-//const gridContainer = document.getElementById("grid");
-//const table = document.createElement("grid");
+  function displayMessage(message) {
+    let messageElement = document.getElementById('message');
+    messageElement.innerText = message;
+  }
+  
+  displayMessage(`Player ${currentPlayer}'s turn`);
 
-//for (let i = 0; i < myArray.length; i++) {
- // const row = document.createElement("tr");
- // for (let j = 0; j < myArray[i].length; j++) {
-  //  const cell = document.createElement("td");
-  //  cell.innerHTML = myArray[i][j];
-  //  row.appendChild(cell);
-  //}
-  //table.appendChild(row);
-//}
+  checkForWinner();
+  checkForTie();
+  switchPlayers();
+  let cell = document.getElementById("id");
+  cell.innerText= 'X';
 
-//gridContainer.appendChild(table);
+  function addEventListeners() {
+    cell.forEach((cell, index) => {
+      cell.addEventListener('click', () => {
+        if (board[index] === null) {
+         board[index] = currentPlayer;
+          cell.innerText = currentPlayer;
+          cell.classList.add('active');
+          checkForWinner();
+          checkForTie();
+          switchPlayers();
+        }
+      });
+    });
+  }
+  
+  addEventListeners();
+ //const cells = document.querySelect(index);
+ // let player1= 'X';
+ // let player2= 'O';
+ function switchPlayers() {
+  if (currentPlayer === 'X') {
+    currentPlayer = 'O';
+  } else {
+    currentPlayer = 'X';
+  }
+  displayMessage(`Player ${currentPlayer}'s turn`);
+}
 
+ function checkForWinner() {
+  let winningCombinations = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+  ];
+
+  let winner = null;
+
+  winningCombinations.forEach(combination => {
+    let [a, b, c] = combination;
+    if (board[a] !== null && board[a] === board[b] && board[b] === board[c]) {
+      winner = board[a];
+      highlightWinnerCells(combination);
+    }
+  });
+
+  if (winner !== null) {
+    displayMessage(`Player ${winner} wins!`);
+    removeEventListeners();
+  }
+}
+function checkForTie() {
+  if (!board.includes(null)) {
+    displayMessage('Tie game!');
+    removeEventListeners();
+  }
+} 
+function updateGameBoard(index) {
+  board[index] = currentPlayer;
+  let cell = cell[index];
+  cell.innerText = currentPlayer;
+  cell.classList.add('active');
+}
