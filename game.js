@@ -5,20 +5,20 @@ const board = [
   ];
   
   function determinePlayer1() {
-    let player1 = Math.random();
-    let player2 = Math.random();
+  let player1 = Math.random();
+  let player2 = Math.random();
     if (player1 > player2) {
-      return 'X';
+          return 'X';
     } else {
-      return 'O';
+     return 'O';
     }
   }
   
-  let currentPlayer = determinePlayer1();
+ let currentPlayer = determinePlayer1();
 
   function displayMessage(message) {
     let messageElement = document.getElementById('message');
-    messageElement.innerText = message;
+    messageElement.textContent = message;
   }
   
   displayMessage(`Player ${currentPlayer}'s turn`);
@@ -31,26 +31,26 @@ const board = [
 
   function addEventListeners() {
     cell.forEach((cell, index) => {
-      cell.addEventListener('click', () => {
-        if (board[index] === null) {
+    cell.addEventListener('click', () => {
+       if (board[index] === null) {
          board[index] = currentPlayer;
-          cell.innerText = currentPlayer;
-          cell.classList.add('active');
-          checkForWinner();
-          checkForTie();
-          switchPlayers();
-        }
+         cell.innerText = currentPlayer;
+         cell.classList.add('active');
+         checkForWinner();
+         checkForTie();
+         switchPlayers();
+       }
       });
     });
   }
   
   addEventListeners();
- //const cells = document.querySelect(index);
- // let player1= 'X';
- // let player2= 'O';
+ const cells = document.querySelect(index);
+  let player1= 'X';
+  let player2= 'O';
  function switchPlayers() {
   if (currentPlayer === 'X') {
-    currentPlayer = 'O';
+   currentPlayer = 'O';
   } else {
     currentPlayer = 'X';
   }
@@ -59,29 +59,29 @@ const board = [
 
  function checkForWinner() {
   let winningCombinations = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-  ];
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6]
+];
 
   let winner = null;
 
   winningCombinations.forEach(combination => {
     let [a, b, c] = combination;
-    if (board[a] !== null && board[a] === board[b] && board[b] === board[c]) {
+   if (board[a] !== null && board[a] === board[b] && board[b] === board[c]) {
       winner = board[a];
-      highlightWinnerCells(combination);
-    }
+     highlightWinnerCells(combination);
+   }
   });
 
-  if (winner !== null) {
+ if (winner !== null) {
     displayMessage(`Player ${winner} wins!`);
-    removeEventListeners();
+   removeEventListeners();
   }
 }
 function checkForTie() {
@@ -92,7 +92,8 @@ function checkForTie() {
 } 
 function updateGameBoard(index) {
   board[index] = currentPlayer;
-  let cell = cell[index];
+  let cell = cells[index];
   cell.innerText = currentPlayer;
   cell.classList.add('active');
 }
+
