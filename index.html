@@ -10,26 +10,28 @@
   <body>
     <h1 class="Title">TicTacToe</h1>
     <h2 class="Score">Score "Wins"</h2>
-    <h2 class="P1">Player 1:</h2>
-    <h2 class="P2">Player 2:</h2>
+    <h2 class="P1">Player X:</h2>
+    <h2 class="P2">Player O:</h2>
     <table>
       <div id="gameboard">Gameboard
       <table id="tic-tac-toe">
         <tr>
-          <td id= "0"></td>
-          <td id= "1"></td>
-          <td id= "2"></td>
+          <td id= "cell-0"></td>
+          <td id= "cell-1"></td>
+          <td id= "cell-2"></td>
         </tr>
         <tr>
-          <td id="3"></td>
-          <td id="4"></td>
-          <td id="5"></td>
+          <td id="cell-3"></td>
+          <td id="cell-4"></td>
+          <td id="cell-5"></td>
         </tr>
         <tr>
-          <td id="6"></td>
-          <td id="7"></td>
-          <td id="8"></td>
-        </tr></div>
+          <td id="cell-6"></td>
+          <td id="cell-7"></td>
+          <td id="cell-8"></td>
+        </tr>
+      </div>
+      <button id="restart" onclick="restartGame()">Restart Game</button>
       </table>
      <div id="message"></div>
      <script src="game.js" defer></script>

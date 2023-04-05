@@ -1,87 +1,76 @@
-const board = [
-    [null, null, null],
-    [null, null, null],
-    [null, null, null]
-  ];
-  
-  function determinePlayer1() {
+let board = [
+  [null, null, null],
+  [null, null, null],
+  [null, null, null]
+];
+let cells = document.querySelectorAll('td');
+function determineFirstPlayer() {
   let player1 = Math.random();
   let player2 = Math.random();
-    if (player1 > player2) {
-          return 'X';
-    } else {
-     return 'O';
-    }
+  if (player1 > player2) {
+    return 'X';
+  } else {
+    return 'O';
   }
-  
- let currentPlayer = determinePlayer1();
+}
 
-  function displayMessage(message) {
-    let messageElement = document.getElementById('message');
-    messageElement.textContent = message;
-  }
-  
-  displayMessage(`Player ${currentPlayer}'s turn`);
+let currentPlayer = determineFirstPlayer();
 
-  checkForWinner();
-  checkForTie();
-  switchPlayers();
-  let cell = document.getElementById("id");
-  cell.innerText= 'X';
+function displayMessage(message) {
+  let messageElement = document.getElementById('message');
+  messageElement.textContent = message;
+}
 
-  function addEventListeners() {
-    cell.forEach((cell, index) => {
-    cell.addEventListener('click', () => {
-       if (board[index] === null) {
-         board[index] = currentPlayer;
-         cell.innerText = currentPlayer;
-         cell.classList.add('active');
-         checkForWinner();
-         checkForTie();
-         switchPlayers();
-       }
-      });
-    });
-  }
-  
-  addEventListeners();
- const cells = document.querySelect(index);
-  let player1= 'X';
-  let player2= 'O';
- function switchPlayers() {
+displayMessage(`Player ${currentPlayer}'s turn`);
+
+// checkForWinner();
+// checkForTie();
+// switchPlayers();
+
+addEventListeners();
+
+let player1 = 'X';
+let player2 = 'O';
+
+function switchPlayers() {
   if (currentPlayer === 'X') {
-   currentPlayer = 'O';
+    currentPlayer = 'O';
   } else {
     currentPlayer = 'X';
   }
   displayMessage(`Player ${currentPlayer}'s turn`);
 }
-
- function checkForWinner() {
+function highlightWinnerCells(cells) {
+  // Iterate over the cells and add a 'winner' class to each cell
+  for (let i = 0; i < cells.length; i++) {
+    cells[i].classList.add('winner');
+  }
+}
+function checkForWinner() {
   let winningCombinations = [
-  [0, 1, 2],
-  [3, 4, 5],
-  [6, 7, 8],
-  [0, 3, 6],
-  [1, 4, 7],
-  [2, 5, 8],
-  [0, 4, 8],
-  [2, 4, 6]
-];
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+  ];
 
   let winner = null;
 
   winningCombinations.forEach(combination => {
     let [a, b, c] = combination;
-   if (board[a] !== null && board[a] === board[b] && board[b] === board[c]) {
+    if (board[a] !== null && board[a] === board[b] && board[b] === board[c]) {
       winner = board[a];
-     highlightWinnerCells(combination);
-   }
+      //highlightWinnerCells(combination);
+    }
   });
 
- if (winner !== null) {
+  if (winner !== null) {
     displayMessage(`Player ${winner} wins!`);
-   removeEventListeners();
+    removeEventListeners();
   }
 }
 function checkForTie() {
@@ -89,7 +78,7 @@ function checkForTie() {
     displayMessage('Tie game!');
     removeEventListeners();
   }
-} 
+}
 function updateGameBoard(index) {
   board[index] = currentPlayer;
   let cell = cells[index];
@@ -97,3 +86,52 @@ function updateGameBoard(index) {
   cell.classList.add('active');
 }
 
+function addEventListeners() {
+  cells.forEach((cell, index) => {
+    cell.addEventListener('click', () => {
+      if (board[index] === null) {
+        updateGameBoard(index);
+        checkForWinner();
+        checkForTie();
+        switchPlayers();
+      }
+    });
+  });
+}
+
+function removeEventListeners() {
+  cells.forEach(cell => {
+    cell.removeEventListener('click', switchPlayers);
+  });
+}
+function updateGameState(index) {
+  board[index] = currentPlayer;
+  let cell = cells[index];
+  cell.innerText = currentPlayer;
+  cell.classList.add('active');
+  switchPlayers();
+}
+
+function restartGame() {
+  board = [
+    null, null, null,
+    null, null, null,
+    null, null, null
+  ];
+  cells.forEach(cell => {
+    cell.innerText = '';
+    cell.classList.remove('active', 'winner');
+  });
+  currentPlayer = determineFirstPlayer();
+  displayMessage(`Player ${currentPlayer}'s turn`);
+  addEventListeners();
+}
+// let gameIsOver = false;
+
+// while (!gameIsOver) {
+//   checkForWinner();
+//   checkForTie();
+//   switchPlayers();
+// }
+// gameIsOver = true;
+// removeEventListeners();
