@@ -58,6 +58,9 @@ body{
     background-color: rgb(221, 166, 148);
 }
 #restart{
-    margin-left:540px;
-    margin-bottom:50px; 
+   margin-bottom:50px; 
+    margin: 0 auto;
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
