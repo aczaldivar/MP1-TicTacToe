@@ -39,14 +39,25 @@ table{
 }
 #gameboard{
     text-align: center;
+    margin-bottom: 50px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    font-size: larger;
 }
 #message {
     text-align: center;
     font-weight: bold;
     font-family: sans-serif;
-
+    margin-top:50px;
 }
 tbody{
     background-color: purple;
     color:crimson;
+}
+body{
+    background-color: rgb(221, 166, 148);
+}
+#restart{
+    margin-left:540px;
+    margin-bottom:50px; 
 }
