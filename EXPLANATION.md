@@ -4,7 +4,7 @@ let board = [
   [null, null, null],
   [null, null, null]
 ];
-We assign first player ‘X’ or and second player ‘O’ by creating a function. Math.random is used to determine outcome after player choice. 
+We assign first player ‘X’ or and second player ‘O’ by creating a function. Math.random is used to determine a number between 0 and 1 and picks the first move to the play with the highest number.  
 let cells = document.querySelectorAll('td');
 function determineFirstPlayer() {
   let player1 = Math.random();
@@ -66,7 +66,7 @@ function updateGameBoard(index) {
   cell.innerText = currentPlayer;
   cell.classList.add('active');
 }
-This function adds event listeners to each cell or index in the board. If the board is empty, look for updating board game, check for winner, check for tie and switch players invocation. 
+This function adds event listeners to each cell or index in the board. Event listeners listen for clicks on each cell. If the board is empty, look for updating board game, check for winner, check for tie and switch players invocation. 
 function addEventListeners() {
   cells.forEach((cell, index) => {
     cell.addEventListener('click', () => {
@@ -84,6 +84,40 @@ function removeEventListeners() {
     cell.removeEventListener('click', switchPlayers);
   });
 }
+
+The game will be updated after the current player has clicked from its active status. 
+function updateGameState(index) {
+  board[index] = currentPlayer;
+  let cell = cells[index];
+  cell.innerText = currentPlayer;
+  cell.classList.add('active');
+  switchPlayers();
+}
+The game will restart with an empty array board. Removing each cell its active status. Starting a new cycle and displaying the current player’s turn with event listeners. 
+function restartGame() {
+  board = [
+    null, null, null,
+    null, null, null,
+    null, null, null
+  ];
+  cells.forEach(cell => {
+    cell.innerText = '';
+    cell.classList.remove('active', 'winner');
+  });
+  currentPlayer = determineFirstPlayer();
+  displayMessage(`Player ${currentPlayer}'s turn`);
+  addEventListeners();
+}
+This is a continuation of the game using Boolean expression.
+let gameIsOver = false;
+
+
+
+
+
+
+
+
 
 
 
