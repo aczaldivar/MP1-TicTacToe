@@ -1,8 +1,10 @@
+The following code is an array of empty cells and the name of the array is called ‘board’. 
 let board = [
   [null, null, null],
   [null, null, null],
   [null, null, null]
 ];
+We assign first player ‘X’ or and second player ‘O’ by creating a function. Math.random is used to determine outcome after player choice. 
 let cells = document.querySelectorAll('td');
 function determineFirstPlayer() {
   let player1 = Math.random();
@@ -13,41 +15,18 @@ function determineFirstPlayer() {
     return 'O';
   }
 }
-
+We display a message to help the player determine who’s turn it is. The turn will depend on a cell chosen and the message will change after a cell has been picked. 
 let currentPlayer = determineFirstPlayer();
 
 function displayMessage(message) {
   let messageElement = document.getElementById('message');
   messageElement.textContent = message;
 }
-
 displayMessage(`Player ${currentPlayer}'s turn`);
 
-// checkForWinner();
-// checkForTie();
-// switchPlayers();
-
-addEventListeners();
-
-let player1 = 'X';
-let player2 = 'O';
-
-function switchPlayers() {
-  if (currentPlayer === 'X') {
-    currentPlayer = 'O';
-  } else {
-    currentPlayer = 'X';
-  }
-  displayMessage(`Player ${currentPlayer}'s turn`);
-}
-function highlightWinnerCells(cells) {
-  // Iterate over the cells and add a 'winner' class to each cell
-  for (let i = 0; i < cells.length; i++) {
-    cells[i].classList.add('winner');
-  }
-}
 function checkForWinner() {
-  let winningCombinations = [
+ winningCombinations is an array of cells that meet with each other horizontally, vertically, or horizontally. Those cells that meet next to each other are the winning combinations.
+ let winningCombinations = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -57,35 +36,37 @@ function checkForWinner() {
     [0, 4, 8],
     [2, 4, 6]
   ];
-
+Winner is an empty array. 
   let winner = null;
 
-  winningCombinations.forEach(combination => {
+There’s a combination of 3 separate boards. One called ‘a’, ‘b’ and then ‘c’. If board ‘a’ is not empty and is equal to the winning boards of ‘b’ and ‘c’ then ‘a’ is a winner. 
+winningCombinations.forEach(combination => {
     let [a, b, c] = combination;
     if (board[a] !== null && board[a] === board[b] && board[b] === board[c]) {
       winner = board[a];
-      //highlightWinnerCells(combination);
-    }
+}
   });
-
+If winner is not on an empty array, the winning player wins and event listeners are removed from the board.
   if (winner !== null) {
     displayMessage(`Player ${winner} wins!`);
     removeEventListeners();
   }
 }
+This function is for tie games except for the empty array-null. Event listeners are removed after a tie game. 
 function checkForTie() {
   if (!board.includes(null)) {
     displayMessage('Tie game!');
     removeEventListeners();
   }
 }
+This function updates cells in the board from the current player. Current player has an ‘active’ status. 
 function updateGameBoard(index) {
   board[index] = currentPlayer;
   let cell = cells[index];
   cell.innerText = currentPlayer;
   cell.classList.add('active');
 }
-
+This function adds event listeners to each cell or index in the board. If the board is empty, look for updating board game, check for winner, check for tie and switch players invocation. 
 function addEventListeners() {
   cells.forEach((cell, index) => {
     cell.addEventListener('click', () => {
@@ -98,42 +79,14 @@ function addEventListeners() {
     });
   });
 }
-
 function removeEventListeners() {
   cells.forEach(cell => {
     cell.removeEventListener('click', switchPlayers);
   });
 }
-function updateGameState(index) {
-  board[index] = currentPlayer;
-  let cell = cells[index];
-  cell.innerText = currentPlayer;
-  cell.classList.add('active');
-  switchPlayers();
-}
 
-function restartGame() {
-  board = [
-    null, null, null,
-    null, null, null,
-    null, null, null
-  ];
-  cells.forEach(cell => {
-    cell.innerText = '';
-    cell.classList.remove('active', 'winner');
-  });
-  currentPlayer = determineFirstPlayer();
-  displayMessage(`Player ${currentPlayer}'s turn`);
-  addEventListeners();
-}
- let gameIsOver = false;
 
- //while (!gameIsOver) {
- // checkForWinner();
- // checkForTie();
- //  switchPlayers();
- //   
-  //  }
-// }
-// gameIsOver = true;
-// removeEventListeners();
+
+
+
+
