@@ -23,9 +23,9 @@ function displayMessage(message) {
 
 displayMessage(`Player ${currentPlayer}'s turn`);
 
-// checkForWinner();
-// checkForTie();
-// switchPlayers();
+//checkForWinner();
+//checkForTie();
+//switchPlayers();
 
 addEventListeners();
 
@@ -46,6 +46,7 @@ function highlightWinnerCells(cells) {
     cells[i].classList.add('winner');
   }
 }
+
 function checkForWinner() {
   let winningCombinations = [
     [0, 1, 2],
@@ -64,7 +65,7 @@ function checkForWinner() {
     let [a, b, c] = combination;
     if (board[a] !== null && board[a] === board[b] && board[b] === board[c]) {
       winner = board[a];
-      //highlightWinnerCells(combination);
+    //  highlightWinnerCells(combination);
     }
   });
 
@@ -126,14 +127,16 @@ function restartGame() {
   displayMessage(`Player ${currentPlayer}'s turn`);
   addEventListeners();
 }
- let gameIsOver = false;
-
- //while (!gameIsOver) {
- // checkForWinner();
- // checkForTie();
- //  switchPlayers();
- //   
-  //  }
-// }
-// gameIsOver = true;
-// removeEventListeners();
+// let gameIsOver = false;
+//if (gameIsOver=false) {
+//  checkForWinner();
+//  checkForTie();
+//   switchPlayers();
+//}
+//   if(gameIsOver = true){
+//      console.log (gameIsOver)
+//      removeEventListeners();
+//    }
+ 
+// ;
+// 

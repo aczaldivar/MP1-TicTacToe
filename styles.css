@@ -64,3 +64,6 @@ body{
     justify-content: center;
     align-items: center;
 }
+button#restart{
+    margin-bottom: 50px;
+}
