@@ -77,7 +77,7 @@ function checkForWinner() {
   }
 
   if (winner !== null) {
-    displayMessage(`Player ${currentPlayer} wins!`);
+    displayMessage(`Player ${winner} wins!`);
     
   }
 }
