@@ -69,6 +69,7 @@ function checkForWinner() {
       //highlightWinnerCells(combination);
     }
   });
+  
 
   function displayMessage(message) {
     let messageElement = document.getElementById('message2');
@@ -77,7 +78,7 @@ function checkForWinner() {
 
   if (winner !== null) {
     displayMessage(`Player ${currentPlayer} wins!`);
-    removeEventListeners();
+    
   }
 }
 function checkForTie() {
@@ -106,11 +107,7 @@ function addEventListeners() {
   });
 }
 
-function removeEventListeners() {
-  cells.forEach(cell => {
-    cell.removeEventListener('click', switchPlayers);
-  });
-}
+
 function updateGameState(index) {
   board[index] = currentPlayer;
   let cell = cells[index];
@@ -118,9 +115,14 @@ function updateGameState(index) {
   cell.classList.add('active');
   switchPlayers();
 }
-//if (playerHasWon()){
-//  playerText = `${currentPlayer} has won!`
-//}
+cells.forEach(cell => {
+  cell.innerText = '';
+  cell.classList.remove('active', 'winner');
+
+});
+
+
+
 function restartGame() {
   board = [
     null, null, null,
@@ -135,17 +137,3 @@ function restartGame() {
   displayMessage(`Player ${currentPlayer}'s turn`);
   addEventListeners();
 }
-//let gameIsOver = false;
-//let gameIsOver
-//if (gameIsOver=false) {
-//  checkForWinner();
-//  checkForTie();
-//   switchPlayers();// 
-//}
-//   if(gameIsOver = true){
-//      console.log (gameIsOver)
-//      removeEventListeners();
-//    }
- 
-// ;
-// 
