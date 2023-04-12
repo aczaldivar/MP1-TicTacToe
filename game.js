@@ -1,3 +1,8 @@
+//**/ * Tic tac toe in JS * Author:(Kefalidis, P) *
+ //Date: (2023) * Code version:(v1) * Availability:
+  //(https://github.com/thepeekay/simple-javascript-games/tree/main/tic-tac-toe) * **/
+
+
 let board = [
   [null, null, null],
   [null, null, null],
@@ -46,6 +51,11 @@ function highlightWinnerCells(cells) {
     cells[i].classList.add('winner');
   }
 }
+
+//**/ * Tic tac toe in JS * Author:(Kefalidis, P) *
+ //Date: (2023) * Code version:(v1) * Availability:
+  //(https://github.com/thepeekay/simple-javascript-games/tree/main/tic-tac-toe) * **/
+
 
 function checkForWinner() {
   let winningCombinations = [
@@ -121,7 +131,11 @@ cells.forEach(cell => {
 
 });
 
+function winningGame(){
+ 
+  
 
+}
 
 function restartGame() {
   board = [

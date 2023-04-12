@@ -21,3 +21,5 @@ If 3 “O”s or 3 “X”s match vertically, horizontally,or diagonally. The fi
 •	Create winning coordinates of the array . 
 After a winner, game over. Reset game: empty cells and event listeners. 
 Recreate another cycle from the beginning and track score. 
+
+** Code contributor* (Panagiotis Kefalidis) 
